@@ -1,41 +1,41 @@
-name: Windows2022
+Tên : Windows2022
 
-on: workflow_dispatch
+trên : quy trình làm việc_dispatch
 
-jobs:
-  build:
+công việc :
+  xây dựng :
 
-    runs-on: windows-2022
-    timeout-minutes: 9999
+    đang chạy : windows-2022
+    thời gian chờ : 9999
 
-    steps:
-    - name: Mendownload Ngrok.
-      run: |
-        Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
-        Invoke-WebRequest https://raw.githubusercontent.com/NIndo123/GoogleCloud-RDP/main/start.bat -OutFile start.bat
-        Invoke-WebRequest https://raw.githubusercontent.com/NIndo123/GoogleCloud-RDP/main/wallpaper.png -OutFile wallpaper.bmp
-        Invoke-WebRequest https://raw.githubusercontent.com/NIndo123/GoogleCloud-RDP/main/wallpaper.bat -OutFile wallpaper.bat
-        Invoke-WebRequest https://raw.githubusercontent.com/NIndo123/GoogleCloud-RDP/main/loop.bat -OutFile loop.bat
-    - name: Mendownload Launcher.
-      run: |
-        Invoke-WebRequest https://raw.githubusercontent.com/NIndo123/GoogleCloud-RDP/main/launcher/Node.js.lnk -OutFile Node.js.lnk
-    - name: Mengextract Ngrok File.
-      run: Expand-Archive ngrok.zip
-    - name: Connect Ke Akun Ngrok.
-      run: .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
-      env:
-        NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
-    - name: Mengaktifkan Akses RDP.
-      run: | 
+    các bước :
+    - Tên : Mendownload Ngrok.
+      chạy : |
+        Gọi-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
+        Gọi-WebRequest https://raw.githubusercontent.com/NIndo123/GoogleCloud-RDP/main/start.bat -OutFile start.bat
+        Gọi-WebRequest https://raw.githubusercontent.com/NIndo123/GoogleCloud-RDP/main/wallpaper.png -OutFile hình nền.bmp
+        Gọi-WebRequest https://raw.githubusercontent.com/NIndo123/GoogleCloud-RDP/main/wallpaper.bat -OutFile hình nền.bat
+        Gọi-WebRequest https://raw.githubusercontent.com/NIndo123/GoogleCloud-RDP/main/loop.bat -OutFile loop.bat
+    - Tên : Mendownload Launcher.
+      chạy : |
+        Gọi-WebRequest https://raw.githubusercontent.com/NIndo123/GoogleCloud-RDP/main/launcher/Node.js.lnk -OutFile Node.js.lnk
+    - Tên : file Mengextract Ngrok.
+      run : Mở rộng-Lưu trữ ngrok.zip
+    - Tên : Kết nối Ke Akun Ngrok.
+      chạy : .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
+      env :
+        NGROK_AUTH_TOKEN : ${{ secret.NGROK_AUTH_TOKEN }}
+    - Tên : Mengaktifkan Akses RDP.
+      chạy : |
         Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
-        Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+        Enable-NetFirewallRule -DisplayGroup "Máy tính từ xa"
         Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
-        copy wallpaper.bmp D:\a\wallpaper.bmp
-        copy wallpaper.bat D:\a\wallpaper.bat
-        copy Node.js.lnk C:\Users\Public\Desktop\Node.js.lnk
-    - name: Membuat Tunnel.
-      run: Start-Process Powershell -ArgumentList '-Noexit -Command ".\ngrok\ngrok.exe tcp --region ap 3389"'
-    - name: Connect Ke RDP Kamu CPU 2 Core - 7GB Ram - 255 SSD.
-      run: cmd /c start.bat
-    - name: Berhasil Dibuat! Anda Bisa Menutup Tab Sekarang.
-      run: cmd /c loop.bat
+        sao chép hình nền.bmp D:\a\wallpaper.bmp
+        sao chép hình nền.bat D:\a\wallpaper.bat
+        sao chép Node.js.lnk C:\Users\Public\Desktop\Node.js.lnk
+    - Tên : Đường hầm Membuat.
+      chạy : Bắt đầu quá trình Powershell -ArgumentList '-Noexit -Command ".\ngrok\ngrok.exe tcp --khu vực ap 3389"'
+    - Tên : Connect Ke RDP Kamu CPU 2 Core - Ram 7GB - SSD 255.
+      chạy : cmd /c start.bat
+    - Tên : Berhasil Dibuat! Tab Menutup của Anda Bisa Sekarang.
+      chạy : cmd /c loop.bat
